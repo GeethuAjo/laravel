@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in!
+                    <br><br>
+                    <a href ="{{URL::to('/directory')}}"><strong>Got to directory listing</strong></a>
                 </div>
             </div>
         </div>

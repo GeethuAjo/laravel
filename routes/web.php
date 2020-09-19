@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/directory', 'DirectoryController@index')->name('directory');
+Route::get('/view-files/{directoryId}', 'DirectoryController@viewFiles')->name('view-file');
+Route::get('/upload-files/{directoryId}', 'DirectoryController@uploadFiles')->name('upload-files');
+Route::post('/store-file/{directoryId}', 'DirectoryController@storeFile')->name('store-file');
