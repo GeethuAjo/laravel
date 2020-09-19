@@ -38,7 +38,7 @@ class DirectoryController extends Controller
     public function viewFiles($directoryId)
     {
         $directory = Directory::find($directoryId);
-        $files = File::where('directory_id',$directoryId)->paginate(10);
+        $files = File::where('directory_id',$directoryId)->paginate(2);
         return view('view-files')->with(['files'=>$files, 'directory' => $directory]);
     }
 
@@ -62,21 +62,51 @@ class DirectoryController extends Controller
     {
         try{
             $validator = Validator::make($request->all(), [            
-                'file' => 'mimes:txt,doc,docx,pdf,png,jpeg,jpg,gif|size:2000',
+                'file' => 'mimes:txt,doc,docx,pdf,png,jpeg,jpg,gif|max:2000',
             ]);
             if ($validator->fails()) {
 
                 return redirect('upload-files/'.$directoryId)
                             ->withErrors($validator)
                             ->withInput();
-            }
+            } 
             $directory = Directory::find($directoryId);
             if($files=$request->file('file')){  
                 $name=$files->getClientOriginalName();  
                 $files->move('images/'.$directory->name,$name); 
             }
             File::create(['name' => $name,'directory_id' => $directoryId ]);
-            return view('view-files')->with([ 'directory' => $directory]);
+            return view('view-files')->with([ 'files'=>$files, 'directory' => $directory]);
+        }catch (\Exception $ex) {
+            return redirect('upload-files/'.$directoryId);
+        }
+
+    }
+
+    /**
+     * upload files 
+     *
+     * @return Response
+     */
+    public function deleteFile($directoryId)
+    {
+        try{
+            $validator = Validator::make($request->all(), [            
+                'file' => 'mimes:txt,doc,docx,pdf,png,jpeg,jpg,gif|max:2000',
+            ]);
+            if ($validator->fails()) {
+
+                return redirect('upload-files/'.$directoryId)
+                            ->withErrors($validator)
+                            ->withInput();
+            } 
+            $directory = Directory::find($directoryId);
+            if($files=$request->file('file')){  
+                $name=$files->getClientOriginalName();  
+                $files->move('images/'.$directory->name,$name); 
+            }
+            File::create(['name' => $name,'directory_id' => $directoryId ]);
+            return view('view-files')->with([ 'files'=>$files, 'directory' => $directory]);
         }catch (\Exception $ex) {
             return redirect('upload-files/'.$directoryId);
         }

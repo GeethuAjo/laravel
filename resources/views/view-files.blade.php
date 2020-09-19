@@ -21,11 +21,13 @@
                             <tr>
                               <th scope="row">{{$key+1}}</th>
                               <td>{{$file->name}}</td>
-                              <td><a href="{{URL::to('view-files')}}/{{$directory->id}}" >Delete File</a></td>
+                              <td><a href="{{URL::to('delete-files')}}/{{$directory->id}}" >Delete File</a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <br>
+                     
                 </div>
             </div>
         </div>
