@@ -88,28 +88,13 @@ class DirectoryController extends Controller
      *
      * @return Response
      */
-    public function deleteFile($directoryId)
+    public function deleteFile($fileId)
     {
-        try{
-            $validator = Validator::make($request->all(), [            
-                'file' => 'mimes:txt,doc,docx,pdf,png,jpeg,jpg,gif|max:2000',
-            ]);
-            if ($validator->fails()) {
-
-                return redirect('upload-files/'.$directoryId)
-                            ->withErrors($validator)
-                            ->withInput();
-            } 
-            $directory = Directory::find($directoryId);
-            if($files=$request->file('file')){  
-                $name=$files->getClientOriginalName();  
-                $files->move('images/'.$directory->name,$name); 
-            }
-            File::create(['name' => $name,'directory_id' => $directoryId ]);
-            return view('view-files')->with([ 'files'=>$files, 'directory' => $directory]);
-        }catch (\Exception $ex) {
-            return redirect('upload-files/'.$directoryId);
-        }
+        $file = File::find($fileId);
+        $directory = Directory::find($file->directory_id);
+        File::where('id',$fileId)->update(['deleted_at'=> date('Y-m-d h:i:s')]);
+        $files = File::where('directory_id',$file->directory_id)->get();
+        return view('view-files')->with([ 'files'=>$files, 'directory' => $directory]);
 
     }
 }
