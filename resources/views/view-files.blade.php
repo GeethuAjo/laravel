@@ -3,9 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Uploaded files {{$directory->name}}</div>
+                <div class="card-header">Files in {{$directory->name}}</div>
 
                 <div class="card-body">
                     <table class="table">
@@ -32,9 +33,14 @@
             </div>
         </div>
 
+        <br>
+        <div class="col-md-12">
+        {{ $files->render() }}
+        </div>
+
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Deleted files {{$directory->name}}</div>
+                <div class="card-header">Deleted files in {{$directory->name}}</div>
 
                 <div class="card-body">
                     <table class="table">
@@ -58,6 +64,11 @@
                 </div>
             </div>
         </div>
+        <br>
+        <div class="col-md-12" >
+        {{ $deleted_files->render() }}
+        </div>
     </div>
+
 </div>
 @endsection
