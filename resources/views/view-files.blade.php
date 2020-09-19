@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="col-md-8">Files in {{$directory->name}} 
+                    <div class="col-md-12">Files in {{$directory->name}} 
                         <br> 
 
                         <form role="form" style="overflow:hidden;" method="post" action="{{URL::to('search-files')}}/{{$directory->id}}/view" enctype="multipart/form-data">
@@ -15,6 +15,8 @@
                             <input type="text"  placeholder="Search " name="search">   
                             <button class="btn btn-search" type="submit"><i class="fa fa-search fa-fw"></i>Search</button>
                         </form>
+
+                        <a href="{{URL::to('/directory')}}" style="float:right">Back</a>
                     </div>
                 </div>
 

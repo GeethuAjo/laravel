@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Upload image to {{$directory->name}}</div>
+                <div class="card-header">Upload image to {{$directory->name}}
+                	<a href="{{URL::to('/directory')}}" style="float:right">Back</a>
+                </div>
 
                 <div class="card-body">
                 	@foreach($errors as $error)
@@ -27,6 +29,7 @@
 							<button type="submit" class="btn btn btn-primary btn-type1 ">Save</button>
 					 	</div>
 					</form>
+
 					
                 </div>
             </div>
