@@ -39,8 +39,19 @@ class DirectoryController extends Controller
     {
         $directory = Directory::find($directoryId);
         $files = File::where('directory_id',$directoryId)->paginate(2);
+        return view('view-files')->with(['files'=>$files, 'directory' => $directory]);
+    }
+
+    /**
+     * Show files listing
+     *
+     * @return Response
+     */
+    public function deletedFiles($directoryId)
+    {
+        $directory = Directory::find($directoryId);
         $deleted_files = File::withTrashed()->where('directory_id',$directoryId)->whereNotNull('deleted_at')->paginate(2);
-        return view('view-files')->with(['deleted_files'=>$deleted_files, 'files'=>$files, 'directory' => $directory]);
+        return view('deleted-files')->with(['deleted_files'=>$deleted_files,'directory' => $directory]);
     }
 
     /**

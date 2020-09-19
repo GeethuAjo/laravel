@@ -15,6 +15,7 @@
                               <th scope="col">Directory</th>
                               <th scope="col">Upload files</th>
                               <th scope="col">View uploaded files</th>
+                              <th scope="col">Deleted files</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,6 +25,7 @@
                               <td>{{$directory->name}}</td>
                               <td><a href="{{URL::to('upload-files')}}/{{$directory->id}}" >Upload Files</a></td>
                               <td><a href="{{URL::to('view-files')}}/{{$directory->id}}">View Files</a></td>
+                              <td><a href="{{URL::to('deleted-files')}}/{{$directory->id}}">Deleted Files</a></td>
                             </tr>
                             @endforeach
                         </tbody>
