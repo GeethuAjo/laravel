@@ -6,7 +6,17 @@
 
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Files in {{$directory->name}}</div>
+                <div class="card-header">
+                    <div class="col-md-8">Files in {{$directory->name}} 
+                        <br> 
+
+                        <form role="form" style="overflow:hidden;" method="post" action="{{URL::to('search-files')}}/{{$directory->id}}/view" enctype="multipart/form-data">
+                        @csrf  
+                            <input type="text"  placeholder="Search " name="search">   
+                            <button class="btn btn-search" type="submit"><i class="fa fa-search fa-fw"></i>Search</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <table class="table">
@@ -35,7 +45,9 @@
 
 
     </div>
+    @if($files->count() != 0)
     {{ $files->render() }}
+    @endif
 
 </div>
 @endsection

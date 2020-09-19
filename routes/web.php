@@ -25,3 +25,4 @@ Route::get('/deleted-files/{directoryId}', 'DirectoryController@deletedFiles')->
 Route::get('/upload-files/{directoryId}', 'DirectoryController@uploadFiles')->name('upload-files');
 Route::post('/store-file/{directoryId}', 'DirectoryController@storeFile')->name('store-file');
 Route::get('/delete-file/{fileId}', 'DirectoryController@deleteFile')->name('delete-file');
+Route::post('/search-files/{directoryId}/{type}', 'DirectoryController@searchFiles')->name('search-file');

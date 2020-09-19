@@ -109,4 +109,30 @@ class DirectoryController extends Controller
         return view('view-files')->with([ 'files'=>$files, 'directory' => $directory]);
 
     }
+
+
+    /**
+     * search file 
+     *
+     * @return Response
+     */
+    public function searchFiles(Request $request,$directoryId,$type)
+    {
+        $filename = $request->get('search'); 
+        $directory = Directory::find($directoryId); 
+        if($type=="view"){
+            $files = File::where('name','like','%'.$filename.'%')->paginate(2);
+            return view('view-files')->with([ 'files'=>$files, 'directory' => $directory]);
+        }
+        elseif($type=="delete"){ 
+            $deleted_files = File::withTrashed()->where('name','like','%'.$filename.'%')->whereNotNull('deleted_at')->paginate(2);
+            return view('deleted-files')->with([ 'deleted_files'=>$deleted_files, 'directory' => $directory]);
+        }
+         
+        
+        
+
+    }
+
+
 }
