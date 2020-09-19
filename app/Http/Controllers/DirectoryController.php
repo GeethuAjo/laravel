@@ -38,8 +38,9 @@ class DirectoryController extends Controller
     public function viewFiles($directoryId)
     {
         $directory = Directory::find($directoryId);
-        $files = File::where('directory_id',$directoryId)->paginate(2);
-        return view('view-files')->with(['files'=>$files, 'directory' => $directory]);
+        $files = File::where('directory_id',$directoryId)->paginate(5);
+        $deleted_files = File::withTrashed()->where('directory_id',$directoryId)->whereNotNull('deleted_at')->paginate(5);
+        return view('view-files')->with(['deleted_files'=>$deleted_files, 'files'=>$files, 'directory' => $directory]);
     }
 
     /**

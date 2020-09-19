@@ -23,3 +23,4 @@ Route::get('/directory', 'DirectoryController@index')->name('directory');
 Route::get('/view-files/{directoryId}', 'DirectoryController@viewFiles')->name('view-file');
 Route::get('/upload-files/{directoryId}', 'DirectoryController@uploadFiles')->name('upload-files');
 Route::post('/store-file/{directoryId}', 'DirectoryController@storeFile')->name('store-file');
+Route::get('/delete-file/{fileId}', 'DirectoryController@deleteFile')->name('delete-file');

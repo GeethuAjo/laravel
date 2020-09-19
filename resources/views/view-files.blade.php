@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{$directory->name}}</div>
+                <div class="card-header">Uploaded files {{$directory->name}}</div>
 
                 <div class="card-body">
                     <table class="table">
@@ -22,6 +22,33 @@
                               <th scope="row">{{$key+1}}</th>
                               <td>{{$file->name}}</td>
                               <td><a href="{{URL::to('delete-file')}}/{{$file->id}}" >Delete File</a></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <br>
+                     
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Deleted files {{$directory->name}}</div>
+
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($deleted_files as $key => $fileD)
+                            <tr>
+                              <th scope="row">{{$key+1}}</th>
+                              <td>{{$fileD->name}}</td>
                             </tr>
                             @endforeach
                         </tbody>
